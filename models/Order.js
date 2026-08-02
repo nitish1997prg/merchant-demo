@@ -1,7 +1,7 @@
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
-import { ORDER_CURRENCIES } from "../enums/OrderCurrencies.js";
-import { ORDER_STATUS } from "../enums/OrderStatus.js";
+import { ORDER_CURRENCIES, ORDER_CURRENCIES_VALUES } from "../enums/OrderCurrencies.js";
+import { ORDER_STATUS, ORDER_STATUS_VALUES } from "../enums/OrderStatus.js";
 
 const orderSchema = new mongoose.Schema({
     orderId : {
@@ -21,12 +21,12 @@ const orderSchema = new mongoose.Schema({
     },
     currency: {
         type: String,
-        enum: ORDER_CURRENCIES,
+        enum: ORDER_CURRENCIES_VALUES,
         required: true,
     },
     status: {
         type: String,
-        enum: ORDER_STATUS,
+        enum: ORDER_STATUS_VALUES,
         default: "pending"
     },
     paymentId: {
