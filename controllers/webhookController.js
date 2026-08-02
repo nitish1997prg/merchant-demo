@@ -21,6 +21,10 @@ export async function webhookPayment(req,res){
 
         await WebhookService.processPaymentWebhook(order,data);
 
+        console.log(
+        `[Merchant] Order ${order.orderId} marked as PAID using payment ${data.paymentId}`
+        );
+
          return res.status(200).json({
             message: "Webhook processed successfully."
         });
@@ -31,4 +35,8 @@ export async function webhookPayment(req,res){
             message: "An internal server error occurred with webhook payment!"
         });
     }
+}
+
+export const webhookController = {
+    webhookPayment
 }
