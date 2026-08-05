@@ -1,0 +1,14 @@
+services:
+  merchant-demo:
+    build:
+      context: .
+
+    container_name: merchant-demo
+
+    env_file:
+      - .env
+
+    ports:
+      - "7000:7000"
+
+    restart: unless-stopped
