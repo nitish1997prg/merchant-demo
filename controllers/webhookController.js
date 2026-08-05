@@ -1,5 +1,6 @@
 import { ORDER_STATUS } from "../enums/OrderStatus.js";
 import { WebhookService } from "../services/webhookService.js";
+import { logger } from "../utils/logger.js";
 
 export async function webhookPayment(req,res){
     try {
@@ -21,9 +22,11 @@ export async function webhookPayment(req,res){
 
         await WebhookService.processPaymentWebhook(order,data);
 
-        console.log(
-        `[Merchant] Order ${order.orderId} marked as PAID using payment ${data.paymentId}`
-        );
+        logger.info({
+            orderId: order.orderId,
+            paymentId: data.paymentId,
+            status: ORDER_STATUS.PAID
+        },"Merchant order marked paid");
 
          return res.status(200).json({
             message: "Webhook processed successfully."

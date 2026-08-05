@@ -1,5 +1,6 @@
 import { Validator } from "../validations/order.validation.js";
 import { OrderService } from "../services/orderService.js";
+import { logger } from "../utils/logger.js";
 
 export async function createOrder(req,res){
     try {
@@ -15,6 +16,10 @@ export async function createOrder(req,res){
         const order = Validator.createOrderSchema.parse(body);
 
         const createdOrder = await OrderService.insertOrder(order);
+
+        logger.info({
+            orderId: createdOrder.orderId
+        },"Order Created");
 
         return res.status(201).json({
             message: "Order created successfully!",
