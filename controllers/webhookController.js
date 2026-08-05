@@ -23,6 +23,7 @@ export async function webhookPayment(req,res){
         await WebhookService.processPaymentWebhook(order,data);
 
         logger.info({
+            traceId: req.headers["x-trace-id"],
             orderId: order.orderId,
             paymentId: data.paymentId,
             status: ORDER_STATUS.PAID
