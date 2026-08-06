@@ -7,11 +7,11 @@ import { SemanticResourceAttributes } from "@opentelemetry/semantic-conventions"
 const sdk = new NodeSDK({
     resource: resourceFromAttributes({
         [SemanticResourceAttributes.SERVICE_NAME]:
-            process.env.KAFKA_CLIENT_ID
+            "merchant-demo"
     }),
 
     traceExporter: new OTLPTraceExporter({
-        url: "http://jaeger:4318/v1/traces"
+        url: "http://host.docker.internal:4318/v1/traces"
     }),
 
     instrumentations: [
